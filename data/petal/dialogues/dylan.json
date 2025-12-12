@@ -1,0 +1,84 @@
+{
+  "initializationAction": "(q.npc.is_in_battle_with(q.player) || !q.npc.is_doing_activity('minecraft:idle', 'cobblemon:battling')) ? q.dialogue.close()",
+  "speakers": {
+    "npc": {
+      "name": {
+        "type": "expression",
+        "expression": "q.npc.name"
+      },
+      "face": "q.npc.face(false);"
+    },
+    "player": {
+      "face": "q.player.face();",
+      "name": {
+        "type": "expression",
+        "expression": "q.player.username"
+      }
+    }
+  },
+  "pages": [
+    {
+      "id": "dylan-intro",
+      "speaker": "npc",
+      "lines": [
+        {
+          "type": "expression",
+          "expression": "'Don\\'t tell my mommy, but I really want some of that pie'"
+        }
+      ],
+      "input": {
+        "type": "option",
+        "vertical": false,
+        "options": [
+          {
+            "text": "Answer",
+            "value": "answer1",
+            "action": [
+              "q.dialogue.set_page('player-answer');"
+            ]
+          },
+          {
+            "text": "Goodbye",
+            "value": "goodbye",
+            "action": [
+              "q.dialogue.set_page('goodbye');"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "player-answer",
+      "speaker": "player",
+      "lines": [
+        {
+          "type": "expression",
+          "expression": "'Does she not feed you?'"
+        }
+      ],
+      "input": "q.dialogue.set_page('dylan-neglect');"
+    },
+    {
+      "id": "dylan-neglect",
+      "speaker": "npc",
+      "lines": [
+        {
+          "type": "expression",
+          "expression": "'No... She neglects me!'"
+        }
+      ],
+      "input": "q.dialogue.close();"
+    },
+    {
+      "id": "goodbye",
+      "speaker": "player",
+      "lines": [
+        {
+          "type": "expression",
+          "expression": "'Goodbye!'"
+        }
+      ],
+      "input": "q.dialogue.close();"
+    }
+  ]
+}
